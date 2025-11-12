@@ -1,0 +1,14 @@
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+.env
+.env.*
+*.sqlite3

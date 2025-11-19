@@ -1,3 +1,24 @@
 from functions import c2, func_soliyev
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+class TwoNumbers(BaseModel):
+    x: float
+    y: float
+
 print(c2(9,16))
 print(func_soliyev(3,4))
+
+app = FastAPI( title="MMM", version="1.0.0",
+description="Платформа для покупки и продажи",
+docs_url="/docs",
+redoc_url="/redoc",
+#debug=settings.DEBUG, 
+)
+
+@app.get("/c2")
+def get_c2(x: float, y: float):
+    return {"result": c2(x, y)}
+@app.post("/c2")
+def post_c2(data: TwoNumbers):
+    return {"result": c2(data.x, data.y)}

@@ -22,3 +22,10 @@ def get_c2(x: float, y: float):
 @app.post("/c2")
 def post_c2(data: TwoNumbers):
     return {"result": c2(data.x, data.y)}
+
+@app.get("/soliyev")
+def get_soliyev(x: float, y: float):
+    return {"result": func_soliyev(x, y)}
+@app.post("/soliyev")
+def post_soliyev(data: TwoNumbers):
+    return {"result": func_soliyev(data.x, data.y)}

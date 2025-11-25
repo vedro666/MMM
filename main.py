@@ -20,8 +20,8 @@ async def root():
 print(c2(9,16))
 print(func_soliyev(3,4))
 class TwoNumbers(BaseModel):
-    x: float
-    y: float
+    k: float
+    m: float
 @app.get("/c2")
 def get_c2(x: float, y: float):
     return {"result": c2(x, y)}
@@ -30,7 +30,11 @@ def get_soliyev(x: float, y: float):
     return {"result": func_soliyev(x, y)}
 @app.post("/c2")
 def post_c2(data: TwoNumbers):
-    return {"result": c2(data.x, data.y)}
+    return {"result": c2(data.k, data.m)}
 @app.post("/soliyev")
 def post_soliyev(data: TwoNumbers):
     return {"result": func_soliyev(data.x, data.y)}
+
+@app.post("/soliyev2")
+def post_soliyev2(x: float, y: float):
+    return {"result": func_soliyev(x, y)}

@@ -29,3 +29,10 @@ def get_soliyev(x: float, y: float):
 @app.post("/soliyev")
 def post_soliyev(data: TwoNumbers):
     return {"result": func_soliyev(data.x, data.y)}
+
+@app.get("/konstantin")
+def get_konstantin(x: float, y: float):
+    return {"result": konstantin(x, y)}
+@app.post("/konstantin")
+def post_konstantin(data: TwoNumbers):
+    return {"result": konstantin(data.x, data.y)}

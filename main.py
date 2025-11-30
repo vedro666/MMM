@@ -1,4 +1,4 @@
-from functions import c2, func_soliyev
+from functions import c2, func_soliyev, konstantin
 from fastapi import FastAPI
 from pydantic import BaseModel
 

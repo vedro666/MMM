@@ -7,3 +7,8 @@ def konstantin(x,y):
         return("YES")
     else:
         return("NO")
+    
+def p1(x,y):
+    return x*6+y*7
+
+

@@ -1,4 +1,4 @@
-from functions import c2, func_soliyev, konstantin
+from functions import c2, func_soliyev, konstantin,p1
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -36,3 +36,12 @@ def get_konstantin(x: float, y: float):
 @app.post("/konstantin")
 def post_konstantin(data: TwoNumbers):
     return {"result": konstantin(data.x, data.y)}
+
+@app.get("/Shakirjanov")
+def get_p1(x: float, y: float):
+    return {"result": p1(x, y)}
+
+@app.post("/Shakirjanov")
+def post_p1(data: TwoNumbers):
+    return {"result": p1(data.x,data.y)}
+

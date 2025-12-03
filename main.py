@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-from functions import c2, func_soliyev, konstantin,p1
-from funcInoyatov import inoyatov
-from fastapi import FastAPI
-from pydantic import BaseModel
-=======
 from functions import c2, func_soliyev, konstantin,p1, inoyatov
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,27 +9,15 @@ from sqlalchemy.orm import sessionmaker
 from models import Base, Calculation
 import os
 
-# Инициализация БД
 DATABASE_URL = "sqlite:///./proekt.db"
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 Base.metadata.create_all(bind=engine)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
->>>>>>> patch02
 
 class TwoNumbers(BaseModel):
     x: float
     y: float
 
-<<<<<<< HEAD
-print(c2(9,16))
-print(func_soliyev(3,4))
-
-app = FastAPI( title="MMM", version="1.0.0",
-description="Платформа для покупки и продажи",
-docs_url="/docs",
-redoc_url="/redoc",
-#debug=settings.DEBUG, 
-=======
 app = FastAPI(
     title="MMM",
     version="1.0.0",
@@ -44,31 +26,16 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# Добавляем CORS middleware для связи фронтенда с бэкендом
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
->>>>>>> patch02
 )
 
 @app.get("/c2")
 def get_c2(x: float, y: float):
-<<<<<<< HEAD
-    return {"result": c2(x, y)}
-@app.post("/c2")
-def post_c2(data: TwoNumbers):
-    return {"result": c2(data.x, data.y)}
-
-@app.get("/soliyev")
-def get_soliyev(x: float, y: float):
-    return {"result": func_soliyev(x, y)}
-@app.post("/soliyev")
-def post_soliyev(data: TwoNumbers):
-    return {"result": func_soliyev(data.x, data.y)}
-=======
     result = c2(x, y)
     db = SessionLocal()
     db_calc = Calculation(operation="c2", x=x, y=y, result=result)
@@ -106,7 +73,6 @@ def post_soliyev(data: TwoNumbers):
     db.commit()
     db.close()
     return {"result": result}
->>>>>>> patch02
 
 @app.get("/konstantin")
 def get_konstantin(x: float, y: float):
@@ -126,15 +92,17 @@ def post_p1(data: TwoNumbers):
 @app.get("/inoyatov")
 def get_inoyatov(x: float, y: float ):
     return {"result": inoyatov(x, y)}
-<<<<<<< HEAD
-@app.post("/inoyatov")
-def post_inoyatov(data: TwoNumbers):
-    return {"result": inoyatov(data.x, data.y)}
-=======
 
 @app.post("/inoyatov")
 def post_inoyatov(data: TwoNumbers):
     return {"result": inoyatov(data.x, data.y)}
+
+@app.get("/artur")
+def get_c2(x: float, y: float):
+ return {"result": artur(x, y)}
+@app.post("/artur")
+def post_c2(data: TwoNumbers):
+ return {"result": artur(data.x, data.y)}
 
 
 @app.get("/history")
@@ -163,4 +131,3 @@ async def root():
 
 if os.path.exists("index.html"):
     app.mount("/static", StaticFiles(directory="."), name="static")
->>>>>>> patch02

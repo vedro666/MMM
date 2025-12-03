@@ -6,8 +6,6 @@ class TwoNumbers(BaseModel):
     x: float
     y: float
 
-print(c2(9,16))
-print(func_soliyev(3,4))
 
 app = FastAPI( title="MMM", version="1.0.0",
 description="Платформа для покупки и продажи",

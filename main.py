@@ -1,4 +1,5 @@
 from functions import c2, func_soliyev, konstantin,p1
+from funcInoyatov import inoyatov
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -45,3 +46,9 @@ def get_p1(x: float, y: float):
 def post_p1(data: TwoNumbers):
     return {"result": p1(data.x,data.y)}
 
+@app.get("/inoyatov")
+def get_inoyatov(x: float, y: float ):
+    return {"result": inoyatov(x, y)}
+@app.post("/inoyatov")
+def post_inoyatov(data: TwoNumbers):
+    return {"result": inoyatov(data.x, data.y)}

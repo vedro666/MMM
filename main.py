@@ -1,5 +1,6 @@
 from functions import c2, func_soliyev, konstantin,p1, inoyatov
 from fastapi import FastAPI
+from funcartur import artur
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -88,6 +89,13 @@ def get_p1(x: float, y: float):
 @app.post("/Shakirjanov")
 def post_p1(data: TwoNumbers):
     return {"result": p1(data.x,data.y)}
+
+@app.get("/artur")
+def get_c2(x: float, y: float):
+ return {"result": artur(x, y)}
+@app.post("/artur")
+def post_c2(data: TwoNumbers):
+ return {"result": artur(data.x, data.y)}
 
 @app.get("/inoyatov")
 def get_inoyatov(x: float, y: float ):

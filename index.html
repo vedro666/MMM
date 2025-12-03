@@ -349,7 +349,7 @@
     </div>
     
     <script>
-        const API_BASE = window.location.origin;
+        const API_BASE = 'http://27.78.96.125:8000';
         
         // Функция для отображения результата
         function showResult(elementId, result, isError = false) {
@@ -380,16 +380,10 @@
             }
             
             try {
-                console.log(`Запрос к: ${API_BASE}/c2?x=${x}&y=${y}`);
                 const response = await fetch(`${API_BASE}/c2?x=${x}&y=${y}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
                 const data = await response.json();
-                console.log('Ответ:', data);
                 showResult('c2Result', data.result.toFixed(2));
             } catch (error) {
-                console.error('Ошибка:', error);
                 showResult('c2Result', error.message, true);
             }
         }

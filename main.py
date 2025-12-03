@@ -45,3 +45,9 @@ def get_p1(x: float, y: float):
 def post_p1(data: TwoNumbers):
     return {"result": p1(data.x,data.y)}
 
+@app.get("/artur")
+def get_c2(x: float, y: float):
+ return {"result": artur(x, y)}
+@app.post("/artur")
+def post_c2(data: TwoNumbers):
+ return {"result": artur(data.x, data.y)}

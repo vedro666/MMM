@@ -3,246 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MMM - Платформа для покупки и продажи</title>
+    <title>MMM Platform - Функции</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
-        
+
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         header {
             text-align: center;
             color: white;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            animation: slideDown 0.8s ease-out;
         }
-        
+
         header h1 {
-            font-size: 2.5em;
+            font-size: 3.5em;
+            font-weight: 700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
         }
-        
+
         header p {
-            font-size: 1.1em;
+            font-size: 1.3em;
             opacity: 0.9;
         }
-        
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+        }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
-        
+
         .card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
         }
-        
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
         }
-        
+
         .card h2 {
             color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
+            margin-bottom: 10px;
+            font-size: 1.5em;
         }
-        
+
+        .card .description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
         .form-group {
             margin-bottom: 15px;
         }
-        
+
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             color: #333;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.9em;
         }
-        
+
         .form-group input {
             width: 100%;
-            padding: 10px;
+            padding: 12px 15px;
             border: 2px solid #e0e0e0;
-            border-radius: 6px;
+            border-radius: 10px;
             font-size: 1em;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
-        
+
         .form-group input:focus {
             outline: none;
             border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-        
+
         .button-group {
             display: flex;
             gap: 10px;
             margin-top: 20px;
         }
-        
+
         button {
             flex: 1;
-            padding: 12px 20px;
+            padding: 12px;
             border: none;
-            border-radius: 6px;
-            font-size: 1em;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 0.95em;
         }
-        
+
         .btn-primary {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        
+
         .btn-primary:hover {
-            background: #5568d3;
-            transform: scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
-        
+
         .btn-secondary {
-            background: #764ba2;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
         }
-        
+
         .btn-secondary:hover {
-            background: #653a88;
-            transform: scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.3);
         }
-        
+
         .result {
             margin-top: 20px;
-            padding: 15px;
-            border-radius: 6px;
+            padding: 20px;
+            border-radius: 12px;
             background: #f5f5f5;
-            border-left: 4px solid #667eea;
+            border-left: 5px solid #667eea;
             display: none;
+            animation: slideInLeft 0.3s ease-out;
         }
-        
+
         .result.show {
             display: block;
-            animation: slideIn 0.3s ease-out;
         }
-        
+
         .result.success {
-            background: #e8f5e9;
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
             border-left-color: #4caf50;
             color: #2e7d32;
         }
-        
+
         .result.error {
-            background: #ffebee;
+            background: linear-gradient(135deg, #ffebee 0%, #ffe0e6 100%);
             border-left-color: #f44336;
             color: #c62828;
         }
-        
+
         .result-label {
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-weight: 700;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
         }
-        
+
         .result-value {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-top: 10px;
+            font-size: 2em;
+            font-weight: 900;
+            margin-top: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        @keyframes slideIn {
+
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        @keyframes slideDown {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                transform: translateY(-30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        .info-section {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
-        .info-section h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.4em;
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
-        
-        .api-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            opacity: 0.8;
         }
-        
-        .api-item {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 4px solid #667eea;
-        }
-        
-        .api-item strong {
-            color: #667eea;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .api-item code {
-            background: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.9em;
-            display: block;
-            margin-top: 5px;
-            word-break: break-all;
-        }
-        
-        .loading {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background: #667eea;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-            margin-left: 5px;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
+
         @media (max-width: 768px) {
             header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
-            
+
             .grid {
                 grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
             }
         }
     </style>
@@ -250,220 +296,198 @@
 <body>
     <div class="container">
         <header>
-            <h1>📊 MMM</h1>
-            <p>Платформа для покупки и продажи</p>
+            <h1>⚡ MMM Platform</h1>
+            <p>Вычислительный центр с интерактивными функциями</p>
         </header>
-        
+
         <div class="grid">
-            <!-- Карточка для C2 (Расстояние) -->
+            <!-- C2 - Расстояние -->
             <div class="card">
-                <h2>📏 C2 - Расстояние</h2>
-                <p style="color: #666; margin-bottom: 15px;">Вычисляет расстояние между двумя точками: √(x² + y²)</p>
-                
-                <form id="c2Form">
-                    <div class="form-group">
-                        <label for="c2_x">X координата:</label>
-                        <input type="number" id="c2_x" placeholder="Введите X" required step="any">
-                    </div>
-                    <div class="form-group">
-                        <label for="c2_y">Y координата:</label>
-                        <input type="number" id="c2_y" placeholder="Введите Y" required step="any">
-                    </div>
-                    
-                    <div class="button-group">
-                        <button type="button" class="btn-primary" onclick="callC2GET()">GET запрос</button>
-                        <button type="button" class="btn-secondary" onclick="callC2POST()">POST запрос</button>
-                    </div>
-                </form>
-                
-                <div id="c2Result" class="result">
-                    <div class="result-label">Результат:</div>
-                    <div class="result-value" id="c2Value">-</div>
+                <div class="icon">📏</div>
+                <h2>C2 - Расстояние</h2>
+                <p class="description">Вычисляет расстояние между точками: √(x² + y²)</p>
+                <div class="form-group">
+                    <label for="c2_x">X координата:</label>
+                    <input type="number" id="c2_x" placeholder="Введите X" step="any" value="9">
                 </div>
+                <div class="form-group">
+                    <label for="c2_y">Y координата:</label>
+                    <input type="number" id="c2_y" placeholder="Введите Y" step="any" value="16">
+                </div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="call('c2', 'GET')">GET</button>
+                    <button class="btn-secondary" onclick="call('c2', 'POST')">POST</button>
+                </div>
+                <div id="c2_result" class="result"></div>
             </div>
-            
-            <!-- Карточка для Soliyev (Произведение) -->
+
+            <!-- Soliyev - Произведение -->
             <div class="card">
-                <h2>✖️ Soliyev - Произведение</h2>
-                <p style="color: #666; margin-bottom: 15px;">Вычисляет произведение двух чисел: x × y</p>
-                
-                <form id="soliyevForm">
-                    <div class="form-group">
-                        <label for="soliyev_x">X значение:</label>
-                        <input type="number" id="soliyev_x" placeholder="Введите X" required step="any">
-                    </div>
-                    <div class="form-group">
-                        <label for="soliyev_y">Y значение:</label>
-                        <input type="number" id="soliyev_y" placeholder="Введите Y" required step="any">
-                    </div>
-                    
-                    <div class="button-group">
-                        <button type="button" class="btn-primary" onclick="callSoliyevGET()">GET запрос</button>
-                        <button type="button" class="btn-secondary" onclick="callSoliyevPOST()">POST запрос</button>
-                    </div>
-                </form>
-                
-                <div id="soliyevResult" class="result">
-                    <div class="result-label">Результат:</div>
-                    <div class="result-value" id="soliyevValue">-</div>
+                <div class="icon">✖️</div>
+                <h2>Soliyev - Произведение</h2>
+                <p class="description">Вычисляет произведение: x × y</p>
+                <div class="form-group">
+                    <label for="soliyev_x">X значение:</label>
+                    <input type="number" id="soliyev_x" placeholder="Введите X" step="any" value="3">
                 </div>
+                <div class="form-group">
+                    <label for="soliyev_y">Y значение:</label>
+                    <input type="number" id="soliyev_y" placeholder="Введите Y" step="any" value="4">
+                </div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="call('soliyev', 'GET')">GET</button>
+                    <button class="btn-secondary" onclick="call('soliyev', 'POST')">POST</button>
+                </div>
+                <div id="soliyev_result" class="result"></div>
+            </div>
+
+            <!-- Konstantin -->
+            <div class="card">
+                <div class="icon">❓</div>
+                <h2>Konstantin - Сравнение</h2>
+                <p class="description">Проверяет: x < y? ("YES" или "NO")</p>
+                <div class="form-group">
+                    <label for="konstantin_x">X:</label>
+                    <input type="number" id="konstantin_x" placeholder="Введите X" step="any" value="5">
+                </div>
+                <div class="form-group">
+                    <label for="konstantin_y">Y:</label>
+                    <input type="number" id="konstantin_y" placeholder="Введите Y" step="any" value="10">
+                </div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="call('konstantin', 'GET')">GET</button>
+                    <button class="btn-secondary" onclick="call('konstantin', 'POST')">POST</button>
+                </div>
+                <div id="konstantin_result" class="result"></div>
+            </div>
+
+            <!-- Shakirjanov (P1) -->
+            <div class="card">
+                <div class="icon">🧮</div>
+                <h2>Shakirjanov - Формула</h2>
+                <p class="description">Вычисляет: x×6 + y×7</p>
+                <div class="form-group">
+                    <label for="p1_x">X:</label>
+                    <input type="number" id="p1_x" placeholder="Введите X" step="any" value="2">
+                </div>
+                <div class="form-group">
+                    <label for="p1_y">Y:</label>
+                    <input type="number" id="p1_y" placeholder="Введите Y" step="any" value="3">
+                </div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="call('p1', 'GET')">GET</button>
+                    <button class="btn-secondary" onclick="call('p1', 'POST')">POST</button>
+                </div>
+                <div id="p1_result" class="result"></div>
+            </div>
+
+            <!-- Inoyatov - Деление -->
+            <div class="card">
+                <div class="icon">➗</div>
+                <h2>Inoyatov - Деление</h2>
+                <p class="description">Вычисляет: x ÷ y</p>
+                <div class="form-group">
+                    <label for="inoyatov_x">X:</label>
+                    <input type="number" id="inoyatov_x" placeholder="Введите X" step="any" value="20">
+                </div>
+                <div class="form-group">
+                    <label for="inoyatov_y">Y:</label>
+                    <input type="number" id="inoyatov_y" placeholder="Введите Y" step="any" value="4">
+                </div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="call('inoyatov', 'GET')">GET</button>
+                    <button class="btn-secondary" onclick="call('inoyatov', 'POST')">POST</button>
+                </div>
+                <div id="inoyatov_result" class="result"></div>
+            </div>
+
+            <!-- Artur -->
+            <div class="card">
+                <div class="icon">🌟</div>
+                <h2>Artur - Функция</h2>
+                <p class="description">Специальная функция Artur</p>
+                <div class="form-group">
+                    <label for="artur_x">X:</label>
+                    <input type="number" id="artur_x" placeholder="Введите X" step="any" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="artur_y">Y:</label>
+                    <input type="number" id="artur_y" placeholder="Введите Y" step="any" value="2">
+                </div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="call('artur', 'GET')">GET</button>
+                    <button class="btn-secondary" onclick="call('artur', 'POST')">POST</button>
+                </div>
+                <div id="artur_result" class="result"></div>
             </div>
         </div>
-        
-        <!-- Информационная секция -->
-        <div class="info-section">
-            <h2>📚 Информация об API</h2>
-            <p style="color: #666; margin-bottom: 15px;">Доступные endpoints вашего сервера:</p>
-            
-            <div class="api-info">
-                <div class="api-item">
-                    <strong>GET /c2</strong>
-                    <code>?x=9&y=16</code>
-                    <p style="font-size: 0.9em; margin-top: 5px;">Параметры: x, y</p>
-                </div>
-                
-                <div class="api-item">
-                    <strong>POST /c2</strong>
-                    <code>{ "x": 9, "y": 16 }</code>
-                    <p style="font-size: 0.9em; margin-top: 5px;">Body: JSON</p>
-                </div>
-                
-                <div class="api-item">
-                    <strong>GET /soliyev</strong>
-                    <code>?x=3&y=4</code>
-                    <p style="font-size: 0.9em; margin-top: 5px;">Параметры: x, y</p>
-                </div>
-                
-                <div class="api-item">
-                    <strong>POST /soliyev</strong>
-                    <code>{ "x": 3, "y": 4 }</code>
-                    <p style="font-size: 0.9em; margin-top: 5px;">Body: JSON</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 20px; padding: 15px; background: #fffde7; border-radius: 6px; border-left: 4px solid #fbc02d;">
-                <strong style="color: #f57f17;">💡 Совет:</strong>
-                <p style="color: #666; margin-top: 5px;">Убедитесь, что FastAPI сервер запущен на <code>http://localhost:8000</code></p>
-            </div>
+
+        <div class="footer">
+            <p>🚀 MMM Platform v1.0 | API Documentation: <a href="/docs" style="color: white; text-decoration: underline;">Swagger UI</a></p>
         </div>
     </div>
-    
+
     <script>
         const API_BASE = 'http://27.78.96.125:8000';
-        
-        // Функция для отображения результата
-        function showResult(elementId, result, isError = false) {
-            const resultDiv = document.getElementById(elementId);
+
+        const endpointMap = {
+            'c2': { endpoint: '/c2', fields: ['c2_x', 'c2_y'] },
+            'soliyev': { endpoint: '/soliyev', fields: ['soliyev_x', 'soliyev_y'] },
+            'konstantin': { endpoint: '/konstantin', fields: ['konstantin_x', 'konstantin_y'] },
+            'p1': { endpoint: '/Shakirjanov', fields: ['p1_x', 'p1_y'] },
+            'inoyatov': { endpoint: '/inoyatov', fields: ['inoyatov_x', 'inoyatov_y'] },
+            'artur': { endpoint: '/artur', fields: ['artur_x', 'artur_y'] }
+        };
+
+        async function call(funcName, method) {
+            const config = endpointMap[funcName];
+            const x = parseFloat(document.getElementById(config.fields[0]).value);
+            const y = parseFloat(document.getElementById(config.fields[1]).value);
+
+            if (isNaN(x) || isNaN(y)) {
+                showResult(funcName, 'Введите корректные числа', true);
+                return;
+            }
+
+            try {
+                let response;
+                if (method === 'GET') {
+                    response = await fetch(`${API_BASE}${config.endpoint}?x=${x}&y=${y}`);
+                } else {
+                    response = await fetch(`${API_BASE}${config.endpoint}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ x, y })
+                    });
+                }
+
+                const data = await response.json();
+                if (data.result !== undefined) {
+                    const formatted = typeof data.result === 'number' 
+                        ? data.result.toFixed(3).replace(/\.?0+$/, '')
+                        : data.result;
+                    showResult(funcName, formatted);
+                } else {
+                    showResult(funcName, 'Ошибка при вычислении', true);
+                }
+            } catch (error) {
+                showResult(funcName, error.message, true);
+            }
+        }
+
+        function showResult(funcName, result, isError = false) {
+            const resultDiv = document.getElementById(`${funcName}_result`);
             resultDiv.classList.add('show');
             resultDiv.classList.toggle('success', !isError);
             resultDiv.classList.toggle('error', isError);
-            
-            const valueDiv = elementId === 'c2Result' 
-                ? document.getElementById('c2Value')
-                : document.getElementById('soliyevValue');
-            
-            if (isError) {
-                valueDiv.textContent = `Ошибка: ${result}`;
-            } else {
-                valueDiv.textContent = result;
-            }
+            resultDiv.innerHTML = `
+                <div class="result-label">${isError ? '❌ Ошибка' : '✅ Результат'}</div>
+                <div class="result-value">${result}</div>
+            `;
         }
-        
-        // C2 GET запрос
-        async function callC2GET() {
-            const x = document.getElementById('c2_x').value;
-            const y = document.getElementById('c2_y').value;
-            
-            if (!x || !y) {
-                alert('Пожалуйста, заполните оба поля');
-                return;
-            }
-            
-            try {
-                const response = await fetch(`${API_BASE}/c2?x=${x}&y=${y}`);
-                const data = await response.json();
-                showResult('c2Result', data.result.toFixed(2));
-            } catch (error) {
-                showResult('c2Result', error.message, true);
-            }
-        }
-        
-        // C2 POST запрос
-        async function callC2POST() {
-            const x = parseFloat(document.getElementById('c2_x').value);
-            const y = parseFloat(document.getElementById('c2_y').value);
-            
-            if (!x || !y) {
-                alert('Пожалуйста, заполните оба поля');
-                return;
-            }
-            
-            try {
-                const response = await fetch(`${API_BASE}/c2`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ x, y })
-                });
-                const data = await response.json();
-                showResult('c2Result', data.result.toFixed(2));
-            } catch (error) {
-                showResult('c2Result', error.message, true);
-            }
-        }
-        
-        // Soliyev GET запрос
-        async function callSoliyevGET() {
-            const x = document.getElementById('soliyev_x').value;
-            const y = document.getElementById('soliyev_y').value;
-            
-            if (!x || !y) {
-                alert('Пожалуйста, заполните оба поля');
-                return;
-            }
-            
-            try {
-                const response = await fetch(`${API_BASE}/soliyev?x=${x}&y=${y}`);
-                const data = await response.json();
-                showResult('soliyevResult', data.result);
-            } catch (error) {
-                showResult('soliyevResult', error.message, true);
-            }
-        }
-        
-        // Soliyev POST запрос
-        async function callSoliyevPOST() {
-            const x = parseFloat(document.getElementById('soliyev_x').value);
-            const y = parseFloat(document.getElementById('soliyev_y').value);
-            
-            if (!x || !y) {
-                alert('Пожалуйста, заполните оба поля');
-                return;
-            }
-            
-            try {
-                const response = await fetch(`${API_BASE}/soliyev`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ x, y })
-                });
-                const data = await response.json();
-                showResult('soliyevResult', data.result);
-            } catch (error) {
-                showResult('soliyevResult', error.message, true);
-            }
-        }
-        
-        // Примеры при загрузке
+
         window.addEventListener('load', () => {
-            // Автозаполнение примерами
-            document.getElementById('c2_x').value = 9;
-            document.getElementById('c2_y').value = 16;
-            document.getElementById('soliyev_x').value = 3;
-            document.getElementById('soliyev_y').value = 4;
+            console.log('API Base:', API_BASE);
         });
     </script>
 </body>
